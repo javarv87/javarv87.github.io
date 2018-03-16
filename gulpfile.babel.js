@@ -44,7 +44,9 @@ const ghPages = require('gulp-gh-pages');
 // Deploy to gbPages
 gulp.task('deploy', ['default'], () => {
   return gulp.src('dist/**/*')
-    .pipe($.ghPages());
+    .pipe($.ghPages({
+      branch: 'master'
+    }));
 });
 
 // Lint JavaScript
