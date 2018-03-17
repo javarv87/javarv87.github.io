@@ -14,5 +14,37 @@
  * limitations under the License.
  */
 @import "tailwind"
-body
-  color: red
+$bg-indigo-theme-dark: #356CFC;
+$bg-indigo-theme-light: #389FFC;
+// keyframes mixin
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+// use of keyframes mixin
++keyframes(bounce)
+  0%, 100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-5px)
+
+.bg-gradient-brand
+  background-image: linear-gradient($bg-indigo-theme-light, $bg-indigo-theme-dark)
+
+.bounce-animation
+  animation-name: bounce
+  -webkit-animation-duration: 1s
+  animation-duration: 1s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+  -webkit-animation-timing-function: linear
+  animation-timing-function: linear
+  animation-iteration-count: infinite
+  -webkit-animation-iteration-count: infinite
+
