@@ -32,19 +32,28 @@ $bg-indigo-theme-light: #389FFC;
   0%, 100%
     transform: translateY(0)
   50%
-    transform: translateY(-5px)
+    transform: translateY(-15px)
+
++keyframes(linear)
+  0%, 100%
+    transform: scale(1.2)
+  50%
+    transform: scale(0.7)
 
 .bg-gradient-brand
   background-image: linear-gradient($bg-indigo-theme-light, $bg-indigo-theme-dark)
 
 .bounce-animation
   animation-name: bounce
-  -webkit-animation-duration: 1s
-  animation-duration: 1s
-  -webkit-animation-fill-mode: both
+  animation-duration: 1.5s
   animation-fill-mode: both
-  -webkit-animation-timing-function: linear
   animation-timing-function: linear
   animation-iteration-count: infinite
-  -webkit-animation-iteration-count: infinite
+
+.linear-animation
+  animation-name: linear
+  animation-duration: 1.5s
+  animation-fill-mode: both
+  animation-timing-function: linear
+  animation-iteration-count: infinite
 
