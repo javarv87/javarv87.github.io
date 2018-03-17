@@ -4678,7 +4678,18 @@ body {
   }
 
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes linear {
+  0%,
+  100% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(.7);
   }
 }
 
@@ -4688,11 +4699,18 @@ body {
 
 .bounce-animation {
   animation-name: bounce;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-fill-mode: both;
   animation-timing-function: linear;
-          animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.linear-animation {
+  animation-name: linear;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 @media (min-width: 576px) {
