@@ -46,7 +46,9 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
   'transparent': 'transparent',
 
-  'black': '#22292f',
+  'black': '#3E3F4D', // theme
+  'grey': '#9192A0', // theme
+  'grey-theme-light': '#BAC2CF', // theme
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',
   'grey-dark': '#8795a1',
@@ -104,7 +106,7 @@ let colors = {
   'blue-lighter': '#bcdefa',
   'blue-lightest': '#eff8ff',
 
-  'indigo-theme-dark': '#356CFC',
+  'indigo-theme-dark': '#356CFC', // theme
   'indigo-darkest': '#191e38',
   'indigo-darker': '#2f365f',
   'indigo-dark': '#5661b3',
@@ -112,7 +114,8 @@ let colors = {
   'indigo-light': '#7886d7',
   'indigo-lighter': '#b2b7ff',
   'indigo-lightest': '#e6e8ff',
-  'indigo-theme-light': '#389FFC',
+  'indigo-theme-light': '#389FFC', // theme
+  'indigo-theme-lighter': '#FAFBFE',
 
   'purple-darkest': '#21183c',
   'purple-darker': '#382b5f',

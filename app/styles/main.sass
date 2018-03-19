@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 @import "tailwind"
+
+// Variables
 $bg-indigo-theme-dark: #356CFC;
 $bg-indigo-theme-light: #389FFC;
+$shadow-btn: rgba(53, 108, 252, 50);
+
 // keyframes mixin
 =keyframes($name)
   @-webkit-keyframes #{$name}
@@ -41,7 +45,16 @@ $bg-indigo-theme-light: #389FFC;
     transform: scale(0.7)
 
 .bg-gradient-brand
-  background-image: linear-gradient($bg-indigo-theme-light, $bg-indigo-theme-dark)
+  background: linear-gradient($bg-indigo-theme-light, $bg-indigo-theme-dark)
+
+.btn-gradient-brand
+  background: linear-gradient(to right, $bg-indigo-theme-light, $bg-indigo-theme-dark)
+  box-shadow: 0 5px 15px 0 $shadow-btn
+  transition: all 0.2s ease-out;
+  &:hover
+    box-shadow: 0 2px 10px 0 $shadow-btn
+  &:focus
+    box-shadow: 0 0 0 0
 
 .bounce-animation
   animation-name: bounce
