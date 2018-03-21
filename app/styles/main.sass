@@ -20,6 +20,14 @@ $bg-indigo-theme-dark: #356CFC;
 $bg-indigo-theme-light: #389FFC;
 $shadow-btn: rgba(53, 108, 252, 50);
 
+// generic transform mixin
+@mixin transform($transforms)
+	-moz-transform: $transforms
+	-o-transform: $transforms
+	-ms-transform: $transforms
+	-webkit-transform: $transforms
+  transform: $transforms
+
 // keyframes mixin
 =keyframes($name)
   @-webkit-keyframes #{$name}
@@ -36,7 +44,7 @@ $shadow-btn: rgba(53, 108, 252, 50);
   0%, 100%
     transform: translateY(0)
   50%
-    transform: translateY(-15px)
+    transform: translateY(-10px)
 
 +keyframes(linear)
   0%, 100%
@@ -70,3 +78,5 @@ $shadow-btn: rgba(53, 108, 252, 50);
   animation-timing-function: linear
   animation-iteration-count: infinite
 
+.inverse
+  @include transform(scaleX(-1))
