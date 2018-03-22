@@ -162,6 +162,20 @@ gulp.task('scripts', () =>
       .pipe(gulp.dest('dist/scripts'))
       .pipe(gulp.dest('.tmp/scripts'))
 );
+gulp.task('copy-lib-scripts', () =>
+  gulp.src([
+    './app/libs/**',
+  ])
+    .pipe($.newer('.tmp/libs'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/libs'))
+    .pipe($.size({ title: 'libs' }))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/libs'))
+    .pipe(gulp.dest('.tmp/libs'))
+);
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', () => {
@@ -192,7 +206,7 @@ gulp.task('html', () => {
 gulp.task('clean', () => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles', 'fonts'], () => {
+gulp.task('serve', ['scripts', 'styles', 'fonts', 'copy-lib-scripts'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -233,7 +247,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'scripts', 'fonts', 'images', 'copy'],
+    ['lint', 'html', 'scripts', 'copy-lib-scripts', 'fonts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )

@@ -40,5 +40,6 @@
   },
   "eslintConfig": {
     "extends": "google"
-  }
+  },
+  "dependencies": {}
 }

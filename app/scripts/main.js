@@ -17,7 +17,7 @@
  *
  */
 /* eslint-env browser */
-(function() {
+(function($) {
   'use strict';
 
   // Check to make sure service workers are supported in the current browser,
@@ -73,4 +73,113 @@
   }
 
   // Your custom JavaScript goes here
-})();
+  $(document).ready(function() {
+    $('.loading-page').fadeOut('slow');
+  });
+  /**
+ * Header Scroll
+ */
+  var navbarEl = document.getElementById('navbar');
+  var specialShadow = document.getElementById('specialShadow');
+  var NAVBAR_HEIGHT = 54;
+  var THRESHOLD = 54;
+  var horizon = NAVBAR_HEIGHT;
+  var whereYouStoppedScrolling = 0;
+  var scrollFactor = 0;
+  var currentTranslate = 0;
+
+  function upOrDown(lastY, currentY) {
+    if (currentY >= lastY) {
+      return goingDown(currentY);
+    }
+    return goingUp(currentY);
+  }
+
+  function goingDown(currentY) {
+    whereYouStoppedScrolling = currentY;
+
+    if (currentY > horizon) {
+      horizon = currentY;
+    }
+
+    translateHeader(currentY, false);
+  }
+
+  function goingUp(currentY) {
+    if (currentY < (whereYouStoppedScrolling - NAVBAR_HEIGHT)) {
+      horizon = currentY + NAVBAR_HEIGHT;
+    }
+
+    translateHeader(currentY, true);
+  }
+
+  function constrainDelta(delta) {
+    return Math.max(0, Math.min(delta, NAVBAR_HEIGHT));
+  }
+
+  function translateHeader(currentY, upwards) {
+    // let topTranslateValue;
+    var translateValue;
+
+    if (upwards && currentTranslate === 0) {
+      translateValue = 0;
+    } else if (currentY <= NAVBAR_HEIGHT) {
+      translateValue = currentY * -1;
+    } else {
+      var delta = constrainDelta(Math.abs(currentY - horizon));
+      translateValue = delta - NAVBAR_HEIGHT;
+    }
+
+    if (translateValue !== currentTranslate) {
+      var navbarStyle = 'transform: translateY(' + translateValue + 'px);';
+      currentTranslate = translateValue;
+      navbarEl.setAttribute('style', navbarStyle);
+    }
+
+    if (currentY > THRESHOLD * 2) {
+      scrollFactor = 1;
+    } else if (currentY > THRESHOLD) {
+      scrollFactor = (currentY - THRESHOLD) / THRESHOLD;
+    } else {
+      scrollFactor = 0;
+    }
+
+    var translateFactor = 1 + translateValue / NAVBAR_HEIGHT;
+    specialShadow.style.opacity = scrollFactor;
+    specialShadow.style.transform = 'scaleY(' + translateFactor + ')';
+  }
+
+  translateHeader(window.scrollY, false);
+
+  var ticking = false;
+  var lastY = 0;
+
+  $(window).scroll(function() {
+    var currentY = window.scrollY;
+    console.log(currentY);
+    if(currentY >= 132) {
+      $('#navbar').removeClass('absolute');
+      $('#navbar').addClass('bg-white fixed');
+      $('#navbar-container').addClass('py-2');
+      $('#logo').removeClass('w-16');
+      $('#logo').addClass('w-8');
+      $('#specialShadow').addClass('bg-special-shadow');
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          upOrDown(lastY, currentY);
+          ticking = false;
+          lastY = currentY;
+        });
+      }
+      ticking = true;
+    } else if (currentY <= 52) {
+      $('#navbar').removeClass('bg-white fixed');
+      $('#navbar').addClass('absolute');
+      $('#navbar-container').removeClass('py-2');
+      $('#logo').removeClass('w-8');
+      $('#logo').addClass('w-16');
+      $('#specialShadow').removeClass('bg-special-shadow');
+    }
+
+  });
+})(window.jQuery);
