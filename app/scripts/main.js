@@ -77,8 +77,28 @@
     $('.loading-page').fadeOut('slow');
   });
   /**
- * Header Scroll
- */
+   * Menú
+   */
+  // Set button to click.
+  var button = document.getElementById('menu-toggle');
+
+  // Click the button.
+  button.onclick = function () {
+    // Toggle class "opened". Set also aria-expanded to true or false.
+    if (-1 !== button.className.indexOf('opened')) {
+      button.className = button.className.replace(' opened', '');
+      button.setAttribute('aria-expanded', 'false');
+      $('#navbar-list').hide();
+    } else {
+      button.className += ' opened';
+      button.setAttribute('aria-expanded', 'true');
+      $('#navbar-list').show();
+    }
+  };
+
+  /**
+   * Header Scroll
+   */
   var navbarEl = document.getElementById('navbar');
   var specialShadow = document.getElementById('specialShadow');
   var NAVBAR_HEIGHT = 54;
@@ -156,30 +176,107 @@
 
   $(window).scroll(function() {
     var currentY = window.scrollY;
-    console.log(currentY);
-    if(currentY >= 132) {
-      $('#navbar').removeClass('absolute');
-      $('#navbar').addClass('bg-white fixed');
-      $('#navbar-container').addClass('py-2');
-      $('#logo').removeClass('w-16');
-      $('#logo').addClass('w-8');
-      $('#specialShadow').addClass('bg-special-shadow');
-      if (!ticking) {
-        window.requestAnimationFrame(function () {
-          upOrDown(lastY, currentY);
-          ticking = false;
-          lastY = currentY;
-        });
-      }
-      ticking = true;
-    } else if (currentY <= 52) {
-      $('#navbar').removeClass('bg-white fixed');
-      $('#navbar').addClass('absolute');
-      $('#navbar-container').removeClass('py-2');
-      $('#logo').removeClass('w-8');
-      $('#logo').addClass('w-16');
-      $('#specialShadow').removeClass('bg-special-shadow');
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        upOrDown(lastY, currentY);
+        ticking = false;
+        lastY = currentY;
+        if (lastY >= 126 && window.innerWidth >= 992) {
+          $('#navbar').css({
+            'position': 'fixed',
+            'background': '#fff'
+          });
+          $('#navbar-container').css({
+            'padding': '.75rem 2rem'
+          });
+          $('#navbar-list').css({
+            'align-self': 'center'
+          });
+          $('#logo').css({
+            'width': '2rem'
+          });
+        }
+        if (window.innerWidth <= 992) {
+          $('#navbar').css({
+            'position': 'fixed',
+            'background': '#fff'
+          });
+          $('#navbar-container').css({
+            'padding': '.75rem 1rem'
+          });
+          $('#navbar-list').css({
+            'align-self': 'center'
+          });
+          $('#logo').css({
+            'width': '2rem'
+          });
+        }
+        if (lastY === 0 && window.innerWidth >= 992) {
+          $('#navbar').css({
+            'position': 'absolute',
+            'background': 'transparent'
+          });
+          $('#navbar-container').css({
+            'padding': '2rem'
+          });
+          $('#navbar-list').css({
+            'align-self': 'flex-start'
+          });
+          $('#logo').css({
+            'width': '4rem'
+          });
+        }
+      });
     }
-
+    ticking = true;
   });
+
+  $(window).resize(function() {
+    if (lastY >= 126 && window.innerWidth >= 992) {
+      $('#navbar').css({
+        'position': 'fixed',
+        'background': '#fff'
+      });
+      $('#navbar-container').css({
+        'padding': '.75rem 2rem'
+      });
+      $('#navbar-list').css({
+        'align-self': 'center'
+      });
+      $('#logo').css({
+        'width': '2rem'
+      });
+    }
+    if (window.innerWidth <= 992) {
+      $('#navbar').css({
+        'position': 'fixed',
+        'background': '#fff'
+      });
+      $('#navbar-container').css({
+        'padding': '.75rem 1rem'
+      });
+      $('#navbar-list').css({
+        'align-self': 'center'
+      });
+      $('#logo').css({
+        'width': '2rem'
+      });
+    }
+    if (lastY === 0 && window.innerWidth >= 992) {
+      $('#navbar').css({
+        'position': 'absolute',
+        'background': 'transparent'
+      });
+      $('#navbar-container').css({
+        'padding': '2rem'
+      });
+      $('#navbar-list').css({
+        'align-self': 'flex-start'
+      });
+      $('#logo').css({
+        'width': '4rem'
+      });
+    }
+  });
+
 })(window.jQuery);

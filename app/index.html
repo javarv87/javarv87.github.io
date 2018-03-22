@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body class="font-sans text-black antialiased">
-    <div class="flex items-center justify-center min-h-screen text-xl w-full loading-page bg-gradient-brand bg-indigo-theme-dark">
+    <div class="fixed flex items-center justify-center min-h-screen text-xl w-full loading-page bg-gradient-brand bg-indigo-theme-dark z-30">
       <div class="container p-4">
         <div class="text-center relative w-48 m-auto">
           <div class="w-16 m-auto mb-4 block">
@@ -85,11 +85,11 @@
       </div>
     </div>
     <!-- End Loader -->
-    <header id="navbar" class="absolute z-10 w-full">
+    <header id="navbar" class="absolute z-20 w-full">
       <div id="specialShadow" class="bg-special-shadow" style="opacity: 0; transform: scaleY(1);"></div>
-      <div id="navbar-container" class="flex items-center justify-between flex-wrap p-8">
-        <div class="flex items-center flex-no-shrink text-white p-1">
-          <svg id="logo" class="w-16"  viewBox="-1 -1 68 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#3E3F4D" stroke-width="1.2" fill="none" fill-rule="evenodd">
+      <div id="navbar-container" class="flex items-center justify-between flex-wrap px-4 py-3 lg:p-8">
+        <div class="flex items-center flex-no-shrink stroke-current text-dark">
+          <svg id="logo" class="w-8 lg:w-16"  viewBox="-1 -1 68 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" fill-rule="evenodd">
             <path d="M36.9228917,30.1570107 C36.0294015,30.6948763 35.3050847,31.9702628 35.3050847,33.006393 L35.3050847,61.1104561 C35.3050847,62.0528632 35.971961,62.4333529 36.7945495,61.9603295 L42.2693131,58.8121079 C43.0919218,58.3390729 43.7587781,57.1921825 43.7587781,56.2495547 L43.7587781,37.3898869 C43.7587781,36.4476629 44.4160545,35.2826382 45.2252151,34.7887271 L57.5320858,27.2766216 C58.3419768,26.7822649 59.0015704,27.1459551 59.0049236,28.0881532 C59.0049236,28.0881532 59.0178138,30.8622877 59.0097512,32.2941331 C59.0076459,32.6679927 58.9545235,33.4711109 58.9545235,33.4711109 C58.8999356,34.411888 58.1160928,35.0215084 58.1160928,35.0215084 C58.1160928,35.0215084 56.143958,36.6654765 55.4086037,36.3716112 C54.6732493,36.077746 55.234525,35.4460824 54.7749268,35.0215084 C54.4900536,34.7469319 54.0090469,34.7469319 53.724289,34.7960212 C53.1021573,34.9032702 52.6382267,35.1745385 52.6382267,35.1745385 L49.7838029,36.7948735 C48.959162,37.262987 48.2906583,38.4046871 48.2906583,39.3473256 L48.2906583,43.7337367 C48.2906583,43.7337367 48.416164,45.1382922 49.3917353,45.4653933 C50.0767444,45.6950711 50.6507801,45.7979374 51.3142644,45.4653933 C51.9777484,45.1328492 53.0421938,44.5819915 53.9293238,44.5819915 C54.816454,44.5819915 55.234525,45.7123844 55.234525,45.7123844 L56.4688352,48.0623135 C56.9076816,48.8978069 57.9153369,49.1673374 58.7189975,48.6646387 L64.6978606,44.9247935 C65.5017445,44.4219553 65.5110881,43.5914091 64.718684,43.0696863 L61.988666,41.2722289 C61.1962826,40.7505197 61.217005,39.940894 62.0369976,39.4626855 L64.5113146,38.0196976 C65.412415,37.4941884 66.1432617,36.2281255 66.143707,35.1908749 L66.1525421,14.6080725 C66.1530276,13.4773588 65.3637798,13.0360847 64.3868909,13.624155 L36.9228917,30.1570107 Z"
               id="Path-R"></path>
             <path d="M27.3230024,61.7187152 C28.0806889,62.2163638 28.6949153,61.867331 28.6949153,60.9409079 L28.6949153,32.9172027 C28.6949153,31.9899829 28.0815128,30.8363326 27.3229582,30.3392178 L8.20084101,18.2200513 C7.44313,17.7234894 6.82888387,18.0733325 6.82888387,19 L6.82888387,25.0780955 C6.82888387,26.0054111 7.44388156,27.1596973 8.20074441,27.6551037 L19.6635758,35.1581276 C20.4212334,35.6540543 21.0354363,36.8070664 21.0354363,37.7348423 L21.0354363,46.3826029 C21.0354363,47.3097564 20.4207036,47.6570559 19.6634144,47.1589902 L9.83855784,40.6972254 C9.08081105,40.1988587 8.46653589,39.0436625 8.46653589,38.1156283 L8.46653589,35.8391293 C8.46653589,34.9117192 7.85111984,33.7564337 7.09568006,33.2611618 L1.42170329,29.5412614 C0.664600521,29.0448992 0.0508474576,29.3944955 0.0508474576,30.3196077 L0.0508474576,42.1292716 C0.0508474576,43.0555025 0.66570536,44.2101998 1.4227603,44.7074336 L27.3230024,61.7187152 Z"
@@ -99,35 +99,35 @@
           </svg>
         </div>
         <div class="block lg:hidden">
-          <button class="flex items-center px-3 py-2 text-indigo-theme-dark">
-            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <button type="button" id="menu-toggle" class="flex items-center p-1 fill-current text-indigo-theme-dark" aria-expanded="false">
+            <svg class="h-4 w-4" stroke-width="1.2" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
               <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              <path class="line line-1" d="M5 13h100v10H5z" />
+              <path class="line line-2" d="M5 43h100v10H5z" />
+              <path class="line line-3" d="M5 73h100v10H5z" />
             </svg>
           </button>
         </div>
-        <div class="w-full hidden lg:flex lg:items-center lg:w-auto">
-          <nav class="text-md font-normal">
-            <a href="#home" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-indigo-theme-dark hover:text-grey mr-8" title="Home">
-              Home
-            </a>
-            <a href="#about" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="About">
-              About
-            </a>
-            <a href="#skills" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Skills">
-              Skills
-            </a>
-            <a href="#projects" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Projects">
-              Projects
-            </a>
-            <a href="#contact" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Contact">
-              Contact
-            </a>
-            <a href="https://medium.com/@_javaruiz" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey" title="Blog">
-              Blog
-            </a>
-          </nav>
-        </div>
+        <nav id="navbar-list" class="self-start w-full text-md font-normal hidden lg:flex lg:items-center lg:w-auto h-screen lg:h-auto">
+          <a href="#home" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-indigo-theme-dark hover:text-grey mr-8" title="Home">
+            Home
+          </a>
+          <a href="#about" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="About">
+            About
+          </a>
+          <a href="#skills" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Skills">
+            Skills
+          </a>
+          <a href="#projects" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Projects">
+            Projects
+          </a>
+          <a href="#contact" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey mr-8" title="Contact">
+            Contact
+          </a>
+          <a href="https://medium.com/@_javaruiz" class="no-underline block lg:inline-block mt-4 lg:mt-0 text-dark hover:text-grey" title="Blog">
+            Blog
+          </a>
+        </nav>
       </div>
     </header>
     <!-- End Header -->
@@ -140,7 +140,7 @@
           </h1>
           <p class="text-justify sm:text-left text-grey font-light mb-4 text-2xl">Welcome to my site, here you're gonna find some things I love to do, I'm Frontend developer and Javascript lover, I like
           to try new technologies for development projects and find the best practices of design and development.</p>
-          <button class="text-white font-normal py-3 px-8 rounded-full btn-gradient-brand mt-4">
+          <button type="button" class="text-white font-normal py-3 px-8 rounded-full btn-gradient-brand mt-4">
             Download Full CV
           </button>
         </div>
@@ -333,7 +333,7 @@
               </div>
             </div>
             <div class="flex items-end justify-center md:justify-start w-full md:pl-8 md:pr-4 md:w-2/3">
-              <button class="btn-download text-indigo-theme-dark font-normal py-3 px-8 rounded-full border border-indigo-theme-dark hover:text-white">
+              <button type="button" class="btn-download text-indigo-theme-dark font-normal py-3 px-8 rounded-full border border-indigo-theme-dark hover:text-white hover:border-white">
                 Download Full CV
               </button>
             </div>
@@ -341,33 +341,27 @@
         </div>
       </section>
       <section class="flex justify-between items-stretch min-h-screen flex-wrap bg-dark">
-        <div class="w-full lg:w-2/5 p-8 self-center">
+        <div class="w-full lg:w-2/5 pb-0 p-8 lg:pb-8 self-center">
           <h2 class="text-white text-left font-normal mb-4 text-4xl">
             <span class="block text-xl mb-4 text-indigo-theme-dark">Work Experience</span>
              My Lasts Projects
           </h2>
           <p class="text-justify sm:text-left text-grey font-light mb-8 text-2xl">In this section you will find some of my last important projects. I’m always trying to be as up-to-date as possible.</p>
         </div>
-        <div class="w-full lg:w-3/5 p-8 self-center">
-          <div class="flex items-center justify-center">
-            <div class="flex flex-col items-end">
-              <div class="block">
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto rounded-full w-48 h-48">1</div>
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto mt-8 rounded-full w-48 h-48">2</div>
-              </div>
+        <div class="w-full lg:w-3/5 pt-0 p-8 lg:pt-8 self-center">
+          <div class="flex items-center justify-center flex-wrap">
+            <div class="block w-full sm:w-auto sm:flex flex-col content-center flex-wrap">
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-0 sm:mr-2 sm:mt-8 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">1</div>
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:mr-2 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">2</div>
             </div>
-            <div class="flex flex-col items-center">
-              <div class="block">
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto mb-8 rounded-full w-48 h-48">1</div>
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto ml-4 mr-4 rounded-full w-48 h-48">2</div>
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto mt-8 rounded-full w-48 h-48">3</div>
-              </div>
+            <div class="block w-full sm:w-auto sm:flex flex-col content-start flex-wrap">
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">1</div>
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">2</div>
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">3</div>
             </div>
-            <div class="flex flex-col items-star">
-              <div class="block">
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto rounded-full w-48 h-48">1</div>
-                <div class="flex-1 text-grey-darker text-center bg-white m-auto mt-8 rounded-full w-48 h-48">2</div>
-              </div>
+            <div class="block w-full sm:w-auto sm:flex flex-col content-start flex-wrap">
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:ml-2 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">1</div>
+              <div class="flex flex-wrap text-grey-darker text-center bg-white m-auto mt-8 sm:ml-2 sm:m-4 rounded-lg sm:rounded-full w-full h-32 sm:w-32 sm:h-32">2</div>
             </div>
           </div>
         </div>
