@@ -83,9 +83,9 @@
   var button = document.getElementById('menu-toggle');
 
   // Click the button.
-  button.onclick = function () {
+  button.onclick = function() {
     // Toggle class "opened". Set also aria-expanded to true or false.
-    if (-1 !== button.className.indexOf('opened')) {
+    if (button.className.indexOf('opened') === 58) {
       button.className = button.className.replace(' opened', '');
       button.setAttribute('aria-expanded', 'false');
       $('#navbar-list').hide();
@@ -108,6 +108,12 @@
   var scrollFactor = 0;
   var currentTranslate = 0;
 
+  /**
+   * Validate for up and down navbar
+   * @param {*} lastY // last position
+   * @param {*} currentY // current position
+   * @return {*} // function
+   */
   function upOrDown(lastY, currentY) {
     if (currentY >= lastY) {
       return goingDown(currentY);
@@ -115,6 +121,10 @@
     return goingUp(currentY);
   }
 
+  /**
+   * GoingUp
+   * @param {*} currentY // Current positio
+   */
   function goingDown(currentY) {
     whereYouStoppedScrolling = currentY;
 
@@ -125,6 +135,10 @@
     translateHeader(currentY, false);
   }
 
+  /**
+   * Going Down
+   * @param {*} currentY // Current positio
+   */
   function goingUp(currentY) {
     if (currentY < (whereYouStoppedScrolling - NAVBAR_HEIGHT)) {
       horizon = currentY + NAVBAR_HEIGHT;
@@ -133,10 +147,20 @@
     translateHeader(currentY, true);
   }
 
+  /**
+   * Delta
+   * @param {*} delta // number
+   * @return {*} // number
+   */
   function constrainDelta(delta) {
     return Math.max(0, Math.min(delta, NAVBAR_HEIGHT));
   }
 
+  /**
+   * Translate header
+   * @param {*} currentY // Current position
+   * @param {*} upwards // up
+   */
   function translateHeader(currentY, upwards) {
     // let topTranslateValue;
     var translateValue;
@@ -183,47 +207,47 @@
         lastY = currentY;
         if (lastY >= 126 && window.innerWidth >= 992) {
           $('#navbar').css({
-            'position': 'fixed',
-            'background': '#fff'
+            position: 'fixed',
+            background: '#fff'
           });
           $('#navbar-container').css({
-            'padding': '.75rem 2rem'
+            padding: '.75rem 2rem'
           });
           $('#navbar-list').css({
             'align-self': 'center'
           });
           $('#logo').css({
-            'width': '2rem'
+            width: '2rem'
           });
         }
         if (window.innerWidth <= 992) {
           $('#navbar').css({
-            'position': 'fixed',
-            'background': '#fff'
+            position: 'fixed',
+            background: '#fff'
           });
           $('#navbar-container').css({
-            'padding': '.75rem 1rem'
+            padding: '.75rem 1rem'
           });
           $('#navbar-list').css({
             'align-self': 'center'
           });
           $('#logo').css({
-            'width': '2rem'
+            width: '2rem'
           });
         }
         if (lastY === 0 && window.innerWidth >= 992) {
           $('#navbar').css({
-            'position': 'absolute',
-            'background': 'transparent'
+            position: 'absolute',
+            background: 'transparent'
           });
           $('#navbar-container').css({
-            'padding': '2rem'
+            padding: '2rem'
           });
           $('#navbar-list').css({
             'align-self': 'flex-start'
           });
           $('#logo').css({
-            'width': '4rem'
+            width: '4rem'
           });
         }
       });
@@ -234,49 +258,48 @@
   $(window).resize(function() {
     if (lastY >= 126 && window.innerWidth >= 992) {
       $('#navbar').css({
-        'position': 'fixed',
-        'background': '#fff'
+        position: 'fixed',
+        background: '#fff'
       });
       $('#navbar-container').css({
-        'padding': '.75rem 2rem'
+        padding: '.75rem 2rem'
       });
       $('#navbar-list').css({
         'align-self': 'center'
       });
       $('#logo').css({
-        'width': '2rem'
+        width: '2rem'
       });
     }
     if (window.innerWidth <= 992) {
       $('#navbar').css({
-        'position': 'fixed',
-        'background': '#fff'
+        position: 'fixed',
+        background: '#fff'
       });
       $('#navbar-container').css({
-        'padding': '.75rem 1rem'
+        padding: '.75rem 1rem'
       });
       $('#navbar-list').css({
         'align-self': 'center'
       });
       $('#logo').css({
-        'width': '2rem'
+        width: '2rem'
       });
     }
     if (lastY === 0 && window.innerWidth >= 992) {
       $('#navbar').css({
-        'position': 'absolute',
-        'background': 'transparent'
+        position: 'absolute',
+        background: 'transparent'
       });
       $('#navbar-container').css({
-        'padding': '2rem'
+        padding: '2rem'
       });
       $('#navbar-list').css({
         'align-self': 'flex-start'
       });
       $('#logo').css({
-        'width': '4rem'
+        width: '4rem'
       });
     }
   });
-
 })(window.jQuery);
