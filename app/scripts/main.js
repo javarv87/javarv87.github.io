@@ -75,32 +75,23 @@
   // Your custom JavaScript goes here
   $(document).ready(function() {
     $('.loading-page').fadeOut('slow');
+    /**
+     * Menú
+     */
+    $('#menu-toggle').click(function() {
+      $('#navbar-container').toggleClass('opened');
+    });
   });
-  /**
-   * Menú
-   */
-  // Set button to click.
-  var button = document.getElementById('menu-toggle');
-
-  // Click the button.
-  button.onclick = function() {
-    // Toggle class "opened". Set also aria-expanded to true or false.
-    if (button.className.indexOf('opened') === 58) {
-      button.className = button.className.replace(' opened', '');
-      button.setAttribute('aria-expanded', 'false');
-      $('#navbar-list').hide();
-    } else {
-      button.className += ' opened';
-      button.setAttribute('aria-expanded', 'true');
-      $('#navbar-list').show();
-    }
-  };
 
   /**
    * Header Scroll
    */
   var navbarEl = document.getElementById('navbar');
   var specialShadow = document.getElementById('specialShadow');
+
+  var navBarContainer = document.getElementById('navbar-container');
+  var navBarList = document.getElementById('navbar-list');
+  var logo = document.getElementById('logo');
   var NAVBAR_HEIGHT = 54;
   var THRESHOLD = 54;
   var horizon = NAVBAR_HEIGHT;
@@ -191,6 +182,20 @@
     var translateFactor = 1 + translateValue / NAVBAR_HEIGHT;
     specialShadow.style.opacity = scrollFactor;
     specialShadow.style.transform = 'scaleY(' + translateFactor + ')';
+
+    navBarContainer.style.padding = '.75rem 2rem';
+    navBarContainer.style.background = '#fff';
+    navBarList.style.alignSelf = 'center';
+    logo.style.width = '2rem';
+            //   $('#logo').css({
+        //     width: '2rem'
+        //   });
+            //   $('#navbar-list').css({
+        //     'align-self': 'center'
+        //   });
+    // $('#navbar-container').css({
+    //   padding: '.75rem 2rem'
+    // });
   }
 
   translateHeader(window.scrollY, false);
@@ -205,101 +210,41 @@
         upOrDown(lastY, currentY);
         ticking = false;
         lastY = currentY;
-        if (lastY >= 126 && window.innerWidth >= 992) {
-          $('#navbar').css({
-            position: 'fixed',
-            background: '#fff'
-          });
-          $('#navbar-container').css({
-            padding: '.75rem 2rem'
-          });
-          $('#navbar-list').css({
-            'align-self': 'center'
-          });
-          $('#logo').css({
-            width: '2rem'
-          });
-        }
-        if (window.innerWidth <= 992) {
-          $('#navbar').css({
-            position: 'fixed',
-            background: '#fff'
-          });
-          $('#navbar-container').css({
-            padding: '.75rem 1rem'
-          });
-          $('#navbar-list').css({
-            'align-self': 'center'
-          });
-          $('#logo').css({
-            width: '2rem'
-          });
-        }
-        if (lastY === 0 && window.innerWidth >= 992) {
-          $('#navbar').css({
-            position: 'absolute',
-            background: 'transparent'
-          });
-          $('#navbar-container').css({
-            padding: '2rem'
-          });
-          $('#navbar-list').css({
-            'align-self': 'flex-start'
-          });
-          $('#logo').css({
-            width: '4rem'
-          });
-        }
+        // if (lastY >= 126 && window.innerWidth >= 992) {
+        //   $('#navbar-container').css({
+        //     padding: '.75rem 2rem'
+        //   });
+        //   $('#navbar-list').css({
+        //     'align-self': 'center'
+        //   });
+        //   $('#logo').css({
+        //     width: '2rem'
+        //   });
+        // }
+        // if (window.innerWidth <= 992) {
+        //   $('#navbar-container').css({
+        //     padding: '.75rem 1rem'
+        //   });
+        //   $('#navbar-list').css({
+        //     'align-self': 'center'
+        //   });
+        //   $('#logo').css({
+        //     width: '2rem'
+        //   });
+        // }
+        // if (lastY === 0 && window.innerWidth >= 992) {
+        //   $('#navbar-container').css({
+        //     padding: '2rem'
+        //   });
+        //   $('#navbar-list').css({
+        //     'align-self': 'flex-start'
+        //   });
+        //   $('#logo').css({
+        //     width: '4rem'
+        //   });
+        // }
       });
     }
     ticking = true;
-  });
-
-  $(window).resize(function() {
-    if (lastY >= 126 && window.innerWidth >= 992) {
-      $('#navbar').css({
-        position: 'fixed',
-        background: '#fff'
-      });
-      $('#navbar-container').css({
-        padding: '.75rem 2rem'
-      });
-      $('#navbar-list').css({
-        'align-self': 'center'
-      });
-      $('#logo').css({
-        width: '2rem'
-      });
-    }
-    if (window.innerWidth <= 992) {
-      $('#navbar').css({
-        position: 'fixed',
-        background: '#fff'
-      });
-      $('#navbar-container').css({
-        padding: '.75rem 1rem'
-      });
-      $('#navbar-list').css({
-        'align-self': 'center'
-      });
-      $('#logo').css({
-        width: '2rem'
-      });
-    }
-    if (lastY === 0 && window.innerWidth >= 992) {
-      $('#navbar').css({
-        position: 'absolute',
-        background: 'transparent'
-      });
-      $('#navbar-container').css({
-        padding: '2rem'
-      });
-      $('#navbar-list').css({
-        'align-self': 'flex-start'
-      });
-      $('#logo').css({
-        width: '4rem'
-      });
-    }
   });
 })(window.jQuery);
