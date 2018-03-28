@@ -73,13 +73,37 @@
   }
 
   // Your custom JavaScript goes here
+  /**
+   * Document Ready
+   */
   $(document).ready(function() {
-    $('.loading-page').fadeOut('slow');
+    /**
+     * Loader
+     */
+    var $loadingPage = $('.loading-page');
+    $loadingPage.fadeOut('slow');
     /**
      * Menú
      */
-    $('#menu-toggle').click(function() {
-      $('#navbar-container').toggleClass('opened');
+    var $navBarContainer = $('#navbar-container');
+    var $menuToggle = $('#menu-toggle');
+    $menuToggle.click(function() {
+      $navBarContainer.toggleClass('opened');
+    });
+    /**
+     * Smooth Scroll
+     */
+    var $root = $('html, body');
+    $('a[href^="#"]').click(function() {
+      var href = $.attr(this, 'href');
+
+      $root.animate({
+        scrollTop: $(href).offset().top
+      }, 500, function() {
+        window.location.hash = href;
+      });
+
+      return false;
     });
   });
 
@@ -153,7 +177,6 @@
    * @param {*} upwards // up
    */
   function translateHeader(currentY, upwards) {
-    // let topTranslateValue;
     var translateValue;
 
     if (upwards && currentTranslate === 0) {
@@ -182,20 +205,6 @@
     var translateFactor = 1 + translateValue / NAVBAR_HEIGHT;
     specialShadow.style.opacity = scrollFactor;
     specialShadow.style.transform = 'scaleY(' + translateFactor + ')';
-
-    navBarContainer.style.padding = '.75rem 2rem';
-    navBarContainer.style.background = '#fff';
-    navBarList.style.alignSelf = 'center';
-    logo.style.width = '2rem';
-            //   $('#logo').css({
-        //     width: '2rem'
-        //   });
-            //   $('#navbar-list').css({
-        //     'align-self': 'center'
-        //   });
-    // $('#navbar-container').css({
-    //   padding: '.75rem 2rem'
-    // });
   }
 
   translateHeader(window.scrollY, false);
@@ -210,41 +219,79 @@
         upOrDown(lastY, currentY);
         ticking = false;
         lastY = currentY;
-        // if (lastY >= 126 && window.innerWidth >= 992) {
-        //   $('#navbar-container').css({
-        //     padding: '.75rem 2rem'
-        //   });
-        //   $('#navbar-list').css({
-        //     'align-self': 'center'
-        //   });
-        //   $('#logo').css({
-        //     width: '2rem'
-        //   });
-        // }
-        // if (window.innerWidth <= 992) {
-        //   $('#navbar-container').css({
-        //     padding: '.75rem 1rem'
-        //   });
-        //   $('#navbar-list').css({
-        //     'align-self': 'center'
-        //   });
-        //   $('#logo').css({
-        //     width: '2rem'
-        //   });
-        // }
-        // if (lastY === 0 && window.innerWidth >= 992) {
-        //   $('#navbar-container').css({
-        //     padding: '2rem'
-        //   });
-        //   $('#navbar-list').css({
-        //     'align-self': 'flex-start'
-        //   });
-        //   $('#logo').css({
-        //     width: '4rem'
-        //   });
-        // }
+        if (lastY >= NAVBAR_HEIGHT && window.innerWidth >= 992) {
+          navbarEl.style.background = '#ffffff';
+          navBarContainer.style.padding = '.75rem 2rem';
+          navBarList.style.alignSelf = 'center';
+          logo.style.width = '2rem';
+        }
+        if (window.innerWidth <= 992) {
+          navbarEl.style.background = '#ffffff';
+          navBarContainer.style.padding = '.75rem 1rem';
+          navBarList.style.alignSelf = 'center';
+          logo.style.width = '2rem';
+        }
+        if (lastY === 0 && window.innerWidth >= 992) {
+          navbarEl.style.background = 'transparent';
+          navBarContainer.style.padding = '2rem';
+          navBarList.style.alignSelf = 'flex-start';
+          logo.style.width = '4rem';
+        }
       });
     }
     ticking = true;
   });
+  $(window).resize(function() {
+    if (lastY >= NAVBAR_HEIGHT && window.innerWidth >= 992) {
+      navBarContainer.style.padding = '.75rem 2rem';
+      navBarList.style.alignSelf = 'center';
+      logo.style.width = '2rem';
+    }
+    if (window.innerWidth <= 992) {
+      navBarContainer.style.padding = '.75rem 1rem';
+      navBarList.style.alignSelf = 'center';
+      logo.style.width = '2rem';
+    }
+    if (lastY === 0 && window.innerWidth >= 992) {
+      navBarContainer.style.padding = '2rem';
+      navBarList.style.alignSelf = 'flex-start';
+      logo.style.width = '4rem';
+    }
+  });
+  // logoSize = function () {
+  //   // Get the real width of the logo image
+  //   var theLogo = $("#logo");
+  //   var newImage = new Image();
+  //   newImage.src = theLogo.attr("src");
+  //   var imgWidth = newImage.width;
+
+  //   // distance over which zoom effect takes place
+  //   var maxScrollDistance = 1300;
+
+  //   // set to window height if larger
+  //   maxScrollDistance = Math.min(maxScrollDistance, $(window).height());
+
+  //   // width at maximum zoom out (i.e. when window has scrolled maxScrollDistance)
+  //   var widthAtMax = 500;
+
+  //   // calculate diff and how many pixels to zoom per pixel scrolled
+  //   var widthDiff = imgWidth - widthAtMax;
+  //   var pixelsPerScroll = (widthDiff / maxScrollDistance);
+
+  //   $(window).scroll(function () {
+  //     // the currently scrolled-to position - max-out at maxScrollDistance
+  //     var scrollTopPos = Math.min($(document).scrollTop(), maxScrollDistance);
+
+  //     // how many pixels to adjust by
+  //     var scrollChangePx = Math.floor(scrollTopPos * pixelsPerScroll);
+
+  //     // calculate the new width
+  //     var zoomedWidth = imgWidth - scrollChangePx;
+
+  //     // set the width
+  //     $('#logo').css('width', zoomedWidth);
+  //   });
+  // }
+
+  // logoSize();
 })(window.jQuery);
