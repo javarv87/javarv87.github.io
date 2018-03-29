@@ -73,6 +73,7 @@
   }
 
   // Your custom JavaScript goes here
+  var logo = document.getElementById('logo');
   /**
    * Document Ready
    */
@@ -95,6 +96,7 @@
      */
     var $root = $('html, body');
     $('a[href^="#"]').click(function() {
+      $navBarContainer.toggleClass('opened');
       var href = $.attr(this, 'href');
 
       $root.animate({
@@ -105,6 +107,14 @@
 
       return false;
     });
+    /**
+     * Logo Size
+     */
+    logoSize();
+
+    if (window.innerWidth <= 992) {
+      logo.removeAttribute('style');
+    }
   });
 
   /**
@@ -114,8 +124,6 @@
   var specialShadow = document.getElementById('specialShadow');
 
   var navBarContainer = document.getElementById('navbar-container');
-  var navBarList = document.getElementById('navbar-list');
-  var logo = document.getElementById('logo');
   var NAVBAR_HEIGHT = 54;
   var THRESHOLD = 54;
   var horizon = NAVBAR_HEIGHT;
@@ -206,6 +214,36 @@
     specialShadow.style.opacity = scrollFactor;
     specialShadow.style.transform = 'scaleY(' + translateFactor + ')';
   }
+  /**
+   * Logo Resize
+   */
+  function logoSize() {
+    var imgWidth = 32;
+    if (window.innerWidth >= 992) {
+      // Get the real width of the logo image
+      imgWidth = logo.getBBox().width;
+    }
+    // distance over which zoom effect takes place
+    var maxScrollDistance = 54;
+    // set to window height if larger
+    maxScrollDistance = Math.min(maxScrollDistance, $(window).height());
+    // width at maximum zoom out (i.e. when window has scrolled maxScrollDistance)
+    var widthAtMax = 32;
+    // calculate diff and how many pixels to zoom per pixel scrolled
+    var widthDiff = imgWidth - widthAtMax;
+    var pixelsPerScroll = (widthDiff / maxScrollDistance);
+
+    $(window).scroll(function() {
+      // the currently scrolled-to position - max-out at maxScrollDistance
+      var scrollTopPos = Math.min($(document).scrollTop(), maxScrollDistance);
+      // how many pixels to adjust by
+      var scrollChangePx = Math.floor(scrollTopPos * pixelsPerScroll);
+      // calculate the new width
+      var zoomedWidth = imgWidth - scrollChangePx;
+      // set the width
+      logo.style.width = zoomedWidth;
+    });
+  }
 
   translateHeader(window.scrollY, false);
 
@@ -222,76 +260,30 @@
         if (lastY >= NAVBAR_HEIGHT && window.innerWidth >= 992) {
           navbarEl.style.background = '#ffffff';
           navBarContainer.style.padding = '.75rem 2rem';
-          navBarList.style.alignSelf = 'center';
-          logo.style.width = '2rem';
         }
         if (window.innerWidth <= 992) {
           navbarEl.style.background = '#ffffff';
           navBarContainer.style.padding = '.75rem 1rem';
-          navBarList.style.alignSelf = 'center';
-          logo.style.width = '2rem';
         }
         if (lastY === 0 && window.innerWidth >= 992) {
           navbarEl.style.background = 'transparent';
           navBarContainer.style.padding = '2rem';
-          navBarList.style.alignSelf = 'flex-start';
-          logo.style.width = '4rem';
         }
       });
     }
     ticking = true;
   });
   $(window).resize(function() {
+    logoSize();
     if (lastY >= NAVBAR_HEIGHT && window.innerWidth >= 992) {
       navBarContainer.style.padding = '.75rem 2rem';
-      navBarList.style.alignSelf = 'center';
-      logo.style.width = '2rem';
     }
     if (window.innerWidth <= 992) {
+      logo.removeAttribute('style');
       navBarContainer.style.padding = '.75rem 1rem';
-      navBarList.style.alignSelf = 'center';
-      logo.style.width = '2rem';
     }
     if (lastY === 0 && window.innerWidth >= 992) {
       navBarContainer.style.padding = '2rem';
-      navBarList.style.alignSelf = 'flex-start';
-      logo.style.width = '4rem';
     }
   });
-  // logoSize = function () {
-  //   // Get the real width of the logo image
-  //   var theLogo = $("#logo");
-  //   var newImage = new Image();
-  //   newImage.src = theLogo.attr("src");
-  //   var imgWidth = newImage.width;
-
-  //   // distance over which zoom effect takes place
-  //   var maxScrollDistance = 1300;
-
-  //   // set to window height if larger
-  //   maxScrollDistance = Math.min(maxScrollDistance, $(window).height());
-
-  //   // width at maximum zoom out (i.e. when window has scrolled maxScrollDistance)
-  //   var widthAtMax = 500;
-
-  //   // calculate diff and how many pixels to zoom per pixel scrolled
-  //   var widthDiff = imgWidth - widthAtMax;
-  //   var pixelsPerScroll = (widthDiff / maxScrollDistance);
-
-  //   $(window).scroll(function () {
-  //     // the currently scrolled-to position - max-out at maxScrollDistance
-  //     var scrollTopPos = Math.min($(document).scrollTop(), maxScrollDistance);
-
-  //     // how many pixels to adjust by
-  //     var scrollChangePx = Math.floor(scrollTopPos * pixelsPerScroll);
-
-  //     // calculate the new width
-  //     var zoomedWidth = imgWidth - scrollChangePx;
-
-  //     // set the width
-  //     $('#logo').css('width', zoomedWidth);
-  //   });
-  // }
-
-  // logoSize();
 })(window.jQuery);
