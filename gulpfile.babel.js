@@ -292,6 +292,7 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
       `${rootDir}/fonts/**/*`,
       `${rootDir}/images/**/*`,
       `${rootDir}/scripts/**/*.js`,
+      `${rootDir}/libs/**/*.js`,
       `${rootDir}/styles/**/*.css`,
       `${rootDir}/*.{html,json}`
     ],
